@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dating.API.Data;
+using Dating.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dating.API.Controllers
@@ -9,11 +11,19 @@ namespace Dating.API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private DataContext _context;
+
+        public ValuesController(DataContext context)
+        {
+            _context = context;
+        }
+        
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Value> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Values.ToList();
+            //return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
