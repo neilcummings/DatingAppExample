@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+
+body {
+  margin-top: 100px;
+  background-color: #fff;
+}
+
+@media(min-width:768px) {
+  body {
+    margin-top: 50px;
+  }
+}
+
+#wrapper {
+  padding-left: 0;
+}
+
+#page-wrapper {
+  width: 100%;
+  padding: 0;
+  background-color: #fff;
+}
+
+.huge {
+  font-size: 50px;
+  line-height: normal;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 225px;
+  }
+
+  #page-wrapper {
+    padding: 10px;
+  }
+}

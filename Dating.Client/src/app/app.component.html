@@ -1,13 +1,12 @@
-<div class="container">
-  <h1>
-    {{title}}
-    <i class="fa fa-music"></i>
-  </h1>
+<div id="wrapper">
+  <app-nav></app-nav>
+  <div id="page-wrapper">
+    <div class="container-fluid">
 
-  <ul *ngFor="let value of values">
-    <li>Value name: {{value.name}}</li>
-  </ul>
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
 </div>
-
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dating.API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dating.API.Data
 {
@@ -9,7 +10,7 @@ namespace Dating.API.Data
         public static void SeedData(this DataContext context)
         {
             // clear the database so we always start fresh with each demo.  Not to be used for prod
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
             
             context.Values.RemoveRange(context.Values);
             context.SaveChanges();

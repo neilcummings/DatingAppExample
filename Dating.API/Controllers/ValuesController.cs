@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dating.API.Data;
 using Dating.API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dating.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
