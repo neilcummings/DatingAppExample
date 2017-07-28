@@ -6,11 +6,26 @@
       <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
       <div *ngIf="firstName.touched && !firstName.valid" class="help-block">First Name is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': lastName.touched && !lastName.valid }">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required/>
-      <div *ngIf="lastName.touched && !lastName.valid" class="help-block">Last Name is required</div>
+    <div class="form-group" [ngClass]="{ 'has-error': dateOfBirth.touched && !dateOfBirth.valid }">
+      <label for="dateOfBirth">Date of Birh</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="model.dateOfBirth" #dateOfBirth="ngModel" required/>
+      <div *ngIf="dateOfBirth.touched && !dateOfBirth.valid" class="help-block">Date of birth is required</div>
     </div>
+
+    <div class="form-group">
+      <span style="font-weight: bold">I'm a </span>
+      <div class="genderSelect form-control ">
+        <label class="radio-inline">
+          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" name="Gender" [(ngModel)]="model.gender"><i
+          class="fa fa-male fa-2x" style="color: blue" aria-hidden="true"></i>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" name="Gender" [(ngModel)]="model.gender"><i
+          class="fa fa-female fa-2x" style="color: deeppink" aria-hidden="true"></i>
+        </label>
+      </div>
+    </div>
+
     <div class="form-group" [ngClass]="{ 'has-error': username.touched && !username.valid }">
       <label for="userName">User Name</label>
       <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="model.username" #username="ngModel" required />

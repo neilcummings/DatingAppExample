@@ -20,7 +20,7 @@
           <a href dropdownToggle class="dropdown-toggle" (click)="false"><i
             class="fa fa-user"></i> Welcome {{accountService.currentUser.firstName}}<span class="caret"></span></a>
           <ul *dropdownMenu class="dropdown-menu">
-            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/profile']"><i class="fa fa-user"></i> My Profile</a></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/profile/', accountService.currentUser.id]"><i class="fa fa-user"></i> My Profile</a></li>
             <li class="divider"></li>
             <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>
@@ -38,7 +38,7 @@
   </div>
 </nav>
 
-<div class="col-sm-3 col-md-2 sidebar">
+<div class="col-md-2 sidebar">
   <ul class="nav nav-sidebar" [hidden]="!accountService.isAuthenticated()">
     <li routerLinkActive="active"><a [routerLink]="['/home']" >Home</a></li>
     <li routerLinkActive="active"><a [routerLink]="['/lists']" >Lists</a></li>

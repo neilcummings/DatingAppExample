@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Dating.API.Dtos;
 using Dating.API.Entities;
+using Dating.API.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Dating.API.Data
 {
@@ -32,6 +36,34 @@ namespace Dating.API.Data
             
             context.Values.AddRange(values);
             context.SaveChanges();
+        }
+
+        public static void SeedUsers(this DataContext context, UserRepository repository)
+        {   
+            context.Users.RemoveRange(context.Users);
+            context.SaveChanges();
+            
+            var userData = System.IO.File.ReadAllText("@Data/userData.json");
+            List<UserDto> users = JsonConvert.DeserializeObject<List<UserDto>>(userData);
+            foreach (var userDto in users)
+            {
+                // check to see if user exists and if not create the user
+                if (context.Users.Any(u => u.Username == userDto.Username))
+                {
+                    // map the dto to the entity
+                    var user = new User
+                    {
+                        Id = userDto.Id,
+                        FirstName = userDto.FirstName,
+                        DateOfBirth = userDto.DateOfBirth,
+                        Gender = userDto.Gender,
+                        Username = userDto.Username
+                    };
+                    repository.Create(user, userDto.Password);
+                }
+
+            }
+
         }
     }
 }

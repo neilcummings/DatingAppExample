@@ -10,11 +10,12 @@ import {ProfileService} from '../_services/profile.service';
 export class HomeComponent implements OnInit {
   title = 'app is working!';
   values: any;
+  profiles: any;
 
   constructor(private profileService: ProfileService){ }
 
   ngOnInit(){
-    this.profileService.getValues().subscribe(values => {this.values = values});
+    this.profileService.getProfiles().subscribe(profiles => {this.profiles = profiles});
   }
 
 }

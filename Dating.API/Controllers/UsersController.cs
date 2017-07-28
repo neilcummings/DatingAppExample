@@ -26,6 +26,8 @@ namespace Dating.API.Controllers
             _appSettings = appSettings;
         }
         
+        // TODO: this should be refactored to an authController
+        
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] UserDto userDto)
@@ -57,7 +59,6 @@ namespace Dating.API.Controllers
                 Id = user.Id,
                 Username = user.Username,
                 FirstName = user.FirstName,
-                LastName = user.LastName,
                 Token = tokenString
             });
         }
@@ -71,7 +72,6 @@ namespace Dating.API.Controllers
             {
                 Id = userDto.Id,
                 FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
                 Username = userDto.Username
             };
 

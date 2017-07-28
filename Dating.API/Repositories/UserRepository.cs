@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper.QueryableExtensions;
 using Dating.API.Data;
+using Dating.API.Dtos;
 using Dating.API.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dating.API.Repositories
 {
@@ -34,14 +38,33 @@ namespace Dating.API.Repositories
             return user;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetUserWithProfiles(int userId)
         {
-            throw new System.NotImplementedException();
+            return _context.Users
+                .Where(u => u.Id != userId)
+                .Include(x => x.Profile)
+                .ThenInclude(p => p.Photos)
+                .ToList();
         }
 
-        public User GetById(int id)
+        public User GetProfile(int id)
         {
-            throw new System.NotImplementedException();
+            var profile = _context.Users
+                .Include(x => x.Profile)
+                .ThenInclude(x => x.Photos)
+                .FirstOrDefault(p => p.Id == id);
+
+            return profile;
+        }
+
+        public Profile GetProfileByUserId(int userId)
+        {
+            var profile = _context.Profiles
+                .Include(x => x.User)
+                .Include(x => x.Photos)
+                .FirstOrDefault(p => p.UserId == userId);
+
+            return profile;
         }
 
         public User Create(User user, string password)
@@ -77,14 +100,24 @@ namespace Dating.API.Repositories
             }
         }
 
-        public void Update(User user, string password = null)
+        public void UpdateProfile(Profile profile)
         {
-            throw new System.NotImplementedException();
+            // no code in this implementation
         }
 
         public void Delete(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool UserExists(int userId)
+        {
+            return _context.Users.Any(u => u.Id == userId);
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
         }
 
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
